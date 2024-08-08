@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=password1
+      - POSTGRES_USER=vika
+      - POSTGRES_DB=links
+  redis:
+    image: redis:latest
+    container_name: redis_container
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redisdata:/data
+    command: redis-server --save 20 1 --loglevel warning --requirepass password1
